@@ -14,9 +14,8 @@ import java.util.List;
  */
 public class ImpiegatoDao {
 
-    List<Impiegato> listImpiegato = new ArrayList();
-    
-    
+    private List<Impiegato> listImpiegato = new ArrayList<>();
+
     //Inserisci impiegati
     public void Impiegatoinsert(Impiegato i) {
         listImpiegato.add(i);
@@ -32,7 +31,7 @@ public class ImpiegatoDao {
         }
         return null;
     }
-    
+
     //Update impiegato
     public boolean updateImpiegato(Impiegato i) {
         boolean Trovato = false;
@@ -42,15 +41,31 @@ public class ImpiegatoDao {
                 listImpiegato.add(i);
             }
         }
+        if (!Trovato) {
+            return false;
+        }
         return false;
     }
-    
-    public void deleteImpiegato(Impiegato codicefiscale) {
+
+    public void printAll() {
         for (Impiegato impiegato : listImpiegato) {
-            if(impiegato.getCodiceFiscale().equals(codicefiscale)) {
-                listImpiegato.remove(codicefiscale);
-                System.out.println("[LOG] Impiegato eliminato");
+            System.out.println(impiegato);
+        }
+    }
+
+    public void delete(String codiceFiscale) {
+        /*for (int i = 0; i < listImpiegato.size(); i++) {
+            if(listImpiegato.get(i).getCodiceFiscale().equals(codiceFiscale)) {
+                listImpiegato.remove(i);
+                System.out.println("Eliminazione");
             }
-        }   
+        }*/
+        for (Impiegato impiegato : listImpiegato) {
+            if (impiegato.getCodiceFiscale().equals(codiceFiscale)) {
+                listImpiegato.remove(impiegato);
+                System.out.println("Eliminazione");
+                break; // esci dal ciclo prima che l'iteratore continui
+            }
+        }
     }
 }
